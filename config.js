@@ -1,7 +1,7 @@
 module.exports = {
   START: true, // Запускать приложение?
   linked: true, // Генерировать ссылку приглашение при запуске?
-  glitch: false, // Бот на Glitch.com ?
+  glitch: true, // Бот на Glitch.com ?
   clanPrice: 20000, // Цена создания клана.
   workInterval: 10, // Кулдаун работы в минутах.
   bonusInterval: 720, // Кулдаун бонуса в минутах.
