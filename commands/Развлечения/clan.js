@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, args, data) => {
     let coins = data.Member.Coins
     if (coins < global.config.clanPrice) return bot.sendErrEmbed(new global.MessageEmbed(), `**Для создания клана требуется ${bot.locale(global.config.clanPrice)} $**`, message);
     if(!args[0]) return bot.sendErrEmbed(new global.MessageEmbed(), "Укажите цвет клана!", message)
-    let clanName = args.slice(1).join(" ");
+    let clanName = args.slice(2).join(" ");
     if(!clanName) return bot.sendErrEmbed(new global.MessageEmbed(), "Укажите название клана!", message);
     let clan = await global.Collection.Clan.findOne(data => data.Name == clanName && data.GuildId == message.guild.id);
     if (!clan) {
@@ -15,6 +15,7 @@ module.exports.run = async (bot, message, args, data) => {
         color: args[0],
         mentionable: false
       }});
+      
       await message.member.roles.add(id);
       await global.Collection.Clan.upsertOne(
         { ClanId: message.author.id, GuildId: message.guild.id },
@@ -113,8 +114,9 @@ module.exports.run = async (bot, message, args, data) => {
       clearTimeout(timeout);
             collector.stop();
       if (data.Clan.ClanId == message.author.id) {
-        await global.Collection.Clan.deleteOne({ ClanId: message.author.id, GuildId: message.guild.id});
-        message.guild.roles.delete(data.Clan.RoleID);
+        const role = message.guild.roles.cache.get(data.Clan.RoleID);
+        if (role) role.delete();
+        await global.Collection.Clan.deleteOne({ ClanId: message.author.id, GuildId: message.guild.id });
         const voiceChannel = message.guild.channels.cache.get(data.Clan.VoiceID);
         if (voiceChannel) voiceChannel.delete();
       }
