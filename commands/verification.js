@@ -31,14 +31,9 @@ module.exports.run = async (bot, message) => {
   ]);
   message.channel
     .send(
-      new global.MessageEmbed().setColor("#2f3136")
-        .setAuthor('Добро пожаловать на Allonne', 'https://emoji.gg/assets/emoji/bongocat.gif')
-        .setImage('https://media.giphy.com/media/N3yLGQ1oMYfGU/giphy.gif')  
-        .setDescription(`Сейчас ты находишься на верификации, чтобы получить доступ к серверу, нажми на реакцию ниже.
-
-\`\`\`Зачем нужна верификация?\`\`\`
-Она защищает сервер от идиотов, малолетних рейдеров с ипользованием ботов, сторонних программ.<:bancat:720205575086014504> 
-`)
+      new global.MessageEmbed().setColor("2CE871")
+        .setTitle(`Добро пожаловать на ${message.guild.name}
+        Для доступа на сервер нажмите - ✅`)
     )
     .then(async msg => {
       await global.Collection.Guild.upsertOne(
