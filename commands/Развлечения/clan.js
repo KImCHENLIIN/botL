@@ -33,7 +33,7 @@ module.exports.run = async(bot, message, args, data) => {
                     collectorYes.stop(); collectorNo.stop(); resolve();
                     msg.edit(msg.embeds[0].setTitle("**Цвет клана останется неопределённым.**"));
                 })
-            }).then((color) => {
+            }).then(async(color) => {
             const { id } = await message.guild.roles.create({
                 data: {
                     name: clanName,
