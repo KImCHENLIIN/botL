@@ -11,7 +11,7 @@ module.exports.run = async(bot, message, args, data) => {
         let clan = await global.Collection.Clan.findOne(data => data.Name == clanName && data.GuildId == message.guild.id);
         if (!clan) {
             new Promise(async(resolve) => {
-                const msg = await message.channel.send(embedModel .setTitle("**Указать цвет клана?**").setColor("#36393f")));
+                const msg = await message.channel.send(embedModel .setTitle("**Указать цвет клана?**").setColor("#36393f"));
                 await msg.react("✅"); await msg.react("⛔");
                 const collectorYes = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id);
                 const collectorNo = msg.createReactionCollector((reaction, user) => reaction.emoji.name === '⛔' && user.id === message.author.id);
