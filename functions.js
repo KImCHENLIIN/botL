@@ -2,6 +2,26 @@
 Экспорт различных функций.
 */
 
+const colors = {
+  "ID Эмоджи": "733683445598781510",
+  "ID Эмодзи 2": "733685031599603722", // И так далее.
+};
+const channelID = "719453344376291328",
+   messageID = "733691112203747450";
+
+// Внимание, данное действие нужно выполнять в ready ивенте. Тобишь тогда, когда бот запустится.
+global.bot.on.channels.cache.get(channelID).messages.fetch(messageID); // Добавляем сообщение в коллекцию.
+
+global.bot.on("messageReactionAdd", (r, user) => {
+  if (user.bot || r.message.id != mesageID || (!(r.emoji.id in colors) && !(r.emoji.name in colors))) return; 
+  r.message.guild.member(user.id).roles.add(colors[(r.emoji.id in colors) ? r.emoji.id : r.emoji.name]);
+});
+
+global.bot.on("messageReactionRemove", (r, user) => {
+  if (user.bot || r.message.id != mesageID || (!(r.emoji.id in colors) && !(r.emoji.name in colors))) return;
+  r.message.guild.member(user.id).roles.remove(colors[(r.emoji.id in colors) ? r.emoji.id : r.emoji.name]);
+
+
 global.bot.isNumeric = n => {
   return !isNaN(parseFloat(n)) && isFinite(n); // Проверяет на число.
 };
