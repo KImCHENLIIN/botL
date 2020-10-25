@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, data) => {
     if (!message.member.hasPermission('BAN_MEMBERS')) return;
     if (!rUser) return bot.sendErrEmbed(embed, "Пользователь не найден | Укажите пользователя через @", message);
     if (rUser.id == message.author.id) return bot.sendErrEmbed(embed, `Вы не можете запретить писать самому себе.`, message);
-    const role = message.guild.roles.cache.get(data.Guild.VoiceMuteRole);
+    let role = message.guild.roles.cache.get(data.Guild.VoiceMuteRole);
     if (!role) {
         if (!message.guild.me.hasPermission("MANAGE_ROLES")) return bot.sendErrEmbed(embed, "У меня нет прав на создание роли voiceMuted!", message);
         role = await message.guild.roles.create({
