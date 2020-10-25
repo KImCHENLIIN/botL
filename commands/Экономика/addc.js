@@ -8,10 +8,10 @@ module.exports.run = async (bot, message, args, data) => {
     if (!clan) return bot.sendErrEmbed(embed, `Клан не найден.`, message);
     const sum = args.slice(-1)[0];
     if (!sum) return bot.sendErrEmbed(embed, `Используйте \`${data.command} <Clan Name> <Сумма>\``, message);
-    await global.Collection.Clan.upsertOne({ GuildId: message.guild.id, ClanId: clan.ClanId }, { Coins: res.Coins + sum })
+    await global.Collection.Clan.upsertOne({ GuildId: message.guild.id, ClanId: clan.ClanId }, { Coins: clan.Coins + sum })
     embed.addField(
         `${message.author.tag} добавил клану "${clan.name}" ${bot.locale(sum)} $`,
-        `**Баланс кланa "${clan.name}" составляет: ${bot.locale(res.Coins + sum)} $**`
+        `**Баланс кланa "${clan.name}" составляет: ${bot.locale(clan.Coins + sum)} $**`
     );
     message.channel.send(embed);
 };
