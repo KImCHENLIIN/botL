@@ -129,19 +129,19 @@ global.random = function (arg, arg2) {
   return randomInteger(arg, arg2);
 };
 
-global.handlerMute = function (data, time) {
+global.handlerMute = function (data, time, voice) {
   const { UserId, GuildId } = data;
   setTimeout(async() => {
-    global.Collection.Member.upsertOne({ UserId, GuildId }, { Mute: null });
+    global.Collection.Member.upsertOne({ UserId, GuildId }, voice ? { VoiceMute: null } : { Mute: null });
     const guild = global.bot.guilds.cache.get(GuildId);
     if (!guild) return;
     const member = guild.member(UserId);
     if (!member) return;
-    const res = await global.Collection.Guild.getOne(data => data.GuildId == GuildId);
-    if (!res.MuteRole) return;
-    const role = guild.roles.cache.get(res.MuteRole);
+    const res = await global.Collection.Guild.getOne(data => data.GuildId === GuildId);
+    if (voice ? !res.VoiceMuteRole : !res.MuteRole) return;
+    const role = guild.roles.cache.get(voice ? res.VoiceMuteRole : res.MuteRole);
     if (!role) {
-      global.MongoDB.Guild.upsertOne({ GuildId }, { MuteRole: null });
+      global.MongoDB.Guild.upsertOne({ GuildId }, voice ? { VoiceMuteRole: null } : { MuteRole: null });
     } else member.roles.remove(role);
   }, time);
 }

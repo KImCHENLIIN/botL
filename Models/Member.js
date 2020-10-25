@@ -3,6 +3,7 @@ const MemberData = {
   GuildId: { type: global.Mongo.Types.String, default: undefined },
   ClanId: { type: global.Mongo.Types.String, default: undefined },
   Mute: { type: global.Mongo.Types.String, default: null },
+  VoiceMute: { type: global.Mongo.Types.String, default: null },
   Ban: { type: global.Mongo.Types.String, default: null },
   Coins: { type: global.Mongo.Types.String, default: 0 },
   VoiceTime: { type: global.Mongo.Types.String, default: 0 },

@@ -2,6 +2,7 @@ const GuildData = {
     GuildId: { type: global.Mongo.Types.String, default: undefined },
     AutoRole: { type: global.Mongo.Types.String, default: null },
     MuteRole: { type: global.Mongo.Types.String, default: null },
+    VoiceMuteRole: { type: global.Mongo.Types.String, default: null },
     blockInvites: { type: global.Mongo.Types.Boolean, default: false },
     Prefix: { type: global.Mongo.Types.String, default: global.config.prefix },
     CmdChannel: { type: global.Mongo.Types.String, default: null },

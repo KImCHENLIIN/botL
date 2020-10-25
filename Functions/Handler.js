@@ -17,7 +17,7 @@ ${Console}
     process.exit();
   }
   Collection.forEach(data => {
-    const { GuildId, UserId } = data;
+    if (data.VoiceMute) global.handlerMute(data, data.VoiceMute - Date.now(), true);
     if (data.Mute) global.handlerMute(data, data.Mute - Date.now());
     if (data.Ban) global.handlerBan(data, data.Ban - Date.now());
   });
