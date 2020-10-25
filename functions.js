@@ -2,6 +2,7 @@
 Экспорт различных функций.
 */
 
+
 global.bot.isNumeric = n => {
   return !isNaN(parseFloat(n)) && isFinite(n); // Проверяет на число.
 };
