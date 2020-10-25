@@ -1,4 +1,5 @@
 module.exports.run = async(bot, message, args, data) => {
+    if (!args[0]) args[0] = "";
     const role = message.guild.roles.cache.get(data.Clan.RoleID);
     const embedModel = new global.MessageEmbed().setColor(role ? role.color : "#36393f");
     async function createClan() {
@@ -33,7 +34,7 @@ module.exports.run = async(bot, message, args, data) => {
                     collectorYes.stop(); collectorNo.stop(); resolve();
                     msg.edit(msg.embeds[0].setTitle("**Цвет клана останется неопределённым.**"));
                 })
-            }).then(async(color) => {
+            }).then(async() => {
             const { id } = await message.guild.roles.create({
                 data: {
                     name: clanName,
@@ -150,9 +151,7 @@ async function createVoice() {
     if (!message.guild.me.permissions.has("MANAGE_CHANNELS")) return bot.sendErrEmbed(embedModel , "У бота отсутствуют права на создание каналов!", message);
     if (!category) return bot.sendErrEmbed(embedModel , "Отсутствует категория \"Кланы\"", message);
     if (data.Clan.Coins < 5000) return bot.sendErrEmbed(embedModel , "У клана недостаточно средств", message);
-    const {
-        id
-    } = await message.guild.channels.create(data.Clan.Name, {
+    const { id } = await message.guild.channels.create(data.Clan.Name, {
         type: "voice",
         parent: category,
         userLimit: 30,
@@ -176,7 +175,7 @@ async function createVoice() {
     });
     await message.channel.send(embedModel .setColor("#36393f").setTitle("**Вы успешно создали клановый войс!**"));
 }
-switch (args[0]) {
+switch (args[0].toLowerCase()) {
     case "create":
         await createClan();
         break;
