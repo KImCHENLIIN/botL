@@ -64,3 +64,14 @@ module.exports.run = async (bot, message, args, data) => {
         mute(time, global.uts(time, "миллисекунду", "миллисекунды", "миллисекунд"), reason);
     }
 };
+
+module.exports.help = {
+    name: 'voicemute',
+    aliases: [],
+    description: 'Запрещает участнику разговаривать.',
+    usages: {
+        'voiceMute @User#0001 1h': 'Запрещает участнику `@User#0001` говорить в войсе 1 час.',
+        'voiceMute @User#0001': 'Запрещает участнику `@User#0001` говорить в войсе навсегда.'
+    },
+    category: 'Модерирование'
+}
