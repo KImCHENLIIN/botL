@@ -6,7 +6,7 @@ module.exports.run = async (bot, message, args, data) => {
             .setTitle("Добавление");
     if (!args[1]) return bot.sendErrEmbed(embed, `Используйте \`${data.command} <Clan Name> <Сумма>\``, message);
     if (!clan) return bot.sendErrEmbed(embed, `Клан не найден.`, message);
-    const sum = args.slice(-1)[0];
+    const sum = parseInt(args.slice(-1)[0]);
     if (!sum) return bot.sendErrEmbed(embed, `Используйте \`${data.command} <Clan Name> <Сумма>\``, message);
     await global.Collection.Clan.upsertOne({ GuildId: message.guild.id, ClanId: clan.ClanId }, { Coins: clan.Coins + sum })
     embed.addField(
