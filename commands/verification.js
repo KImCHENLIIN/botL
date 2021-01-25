@@ -32,7 +32,7 @@ module.exports.run = async (bot, message) => {
   message.channel
     .send(
       new global.MessageEmbed().setColor("#2f3136")
-        .setAuthor('Добро пожаловать на SPACEXH.', 'https://emoji.gg/assets/emoji/bongocat.gif')
+        .setAuthor('Добро пожаловать на Clouds Of Space.', 'https://emoji.gg/assets/emoji/bongocat.gif')
         .setImage('https://media.giphy.com/media/N3yLGQ1oMYfGU/giphy.gif')  
         .setDescription(`Сейчас ты находишься на верификации, чтобы получить доступ к серверу, нажми на реакцию ниже.
 
