@@ -1,5 +1,5 @@
 module.exports.run = async (bot, message, args, data) => {
-    if (message.guild.owner.id !== message.author.id) return;
+    if (message.guild.ownerID !== message.author.id) return;
     let clan = await global.Collection.Clan.findOne(data => data.Name === args.slice(0, -1).join(" ") && data.GuildId === message.guild.id);
         embed = new global.MessageEmbed()
             .setColor("80EB52")

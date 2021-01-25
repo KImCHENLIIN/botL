@@ -56,7 +56,7 @@ global.bot.on("message", async message => {
     global.commands.forEach(e => arr.push(e));
     const cmd = arr.find(e => (e.help.aliases && e.help.aliases.some(a => a.toLowerCase() == command)) || e.help.name.toLowerCase() === command);
     if (cmd) {
-      if (message.guild.owner.id != message.author.id && cmd.help.category != "18+" && message.channel.id != res.Guild.CmdChannel) {
+      if (message.guild.ownerID != message.author.id && cmd.help.category != "18+" && message.channel.id != res.Guild.CmdChannel) {
         const channel = message.guild.channels.cache.get(res.Guild.CmdChannel);
         if (channel) return message.channel.send(new global.MessageEmbed().setColor("9640FF").addField(message.author.tag, `**Использование команд только в канале ${channel}**`));
         else res.Guild.CmdChannel = null;

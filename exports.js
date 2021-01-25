@@ -16,7 +16,7 @@ global.fs = require("fs"); // Для работы с файлами.
         .toString("utf8")) + "";
   console.log(`Логи установки модулей:\n${log}`)
 }
-global.bot = new global.Discord.Client({ disableEveryone: true }); // Клиент Дискорд бота.
+global.bot = new global.Discord.Client({ disableEveryone: true, ws: { intents: Discord.Intents.ALL }, fetchAllMembers: true }); // Клиент Дискорд бота.
 global.commands = new Map(); // Коллекция в которую записывается команды.
 global.bot.servers = []; // Массив с серверами где играет музыка.
 global.config = require("./config.js"); // Настройка бота.
